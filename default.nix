@@ -8,12 +8,17 @@
 
 { pkgs ? import <nixpkgs> { } }:
 
+let
+  athena-pkgs = import ./pkgs { inherit pkgs; };
+in
 {
   # The `lib`, `modules`, and `overlays` names are special
   lib = import ./lib { inherit pkgs; }; # functions
   modules = import ./modules; # NixOS modules
   overlays = import ./overlays; # nixpkgs overlays
 
+  debathena-aclocal = athena-pkgs.debathena-aclocal;
+  discuss = athena-pkgs.discuss;
   example-package = pkgs.callPackage ./pkgs/example-package { };
   # some-qt5-package = pkgs.libsForQt5.callPackage ./pkgs/some-qt5-package { };
   # ...

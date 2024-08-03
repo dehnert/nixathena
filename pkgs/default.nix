@@ -1,12 +1,12 @@
 # https://nix.dev/tutorials/packaging-existing-software#building-with-nix-build
 # default.nix
-{ dockerName ? "ghcr.io/dehnert/formationbot-rs/discord-bot", dockerTag ? "test" } :
+{ pkgs }:
 let
-  pkgs = import <nixpkgs> { config = {}; overlays = []; };
   debathena-aclocal = pkgs.callPackage ./aclocal.nix { };
 in
 {
-  discuss = pkgs.callPackage ./discuss.nix { debathena-aclocal=debathena-aclocal; };
+  inherit debathena-aclocal;
+  discuss = pkgs.callPackage ./discuss.nix { inherit debathena-aclocal; };
   # https://ryantm.github.io/nixpkgs/builders/images/dockertools/
 #   docker = pkgs.dockerTools.buildLayeredImage {
 #     name = "${dockerName}";
