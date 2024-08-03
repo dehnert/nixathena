@@ -7,6 +7,7 @@ in
 {
   inherit debathena-aclocal;
   discuss = pkgs.callPackage ./discuss.nix { inherit debathena-aclocal; };
+  remctl = pkgs.callPackage ./remctl.nix { };
   # https://ryantm.github.io/nixpkgs/builders/images/dockertools/
 #   docker = pkgs.dockerTools.buildLayeredImage {
 #     name = "${dockerName}";
