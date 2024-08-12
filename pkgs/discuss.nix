@@ -36,5 +36,12 @@ in stdenv.mkDerivation {
   ];
 
   #configureFlags = ["--without-krb4" "--with-krb5" "--with-zephyr"];
-  configureFlags = ["--without-krb4" "--with-krb5" "--without-zephyr"];
+  configureFlags = [
+    "--without-krb4" "--with-krb5" "--without-zephyr"
+  ];
+  preConfigure = ''
+  configureFlagsArray+=(
+    "CFLAGS=-DDSC_SETUP=\\\"$out/bin/dsc_setup\\\""
+  )
+  '';
 }

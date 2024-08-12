@@ -13,13 +13,13 @@ in
 
     remctl_options = {
       executable = mkOption {
-	type = types.string;
+	type = types.str;
 	example = "/bin/echo";
 	description = "Executable to run";
       };
 
       help = mkOption {
-	type = types.nullOr types.string;
+	type = types.nullOr types.str;
 	example = "--help";
 	default = null;
 	description = "Argument for the command that will print help for the subcommand";
@@ -30,20 +30,25 @@ in
       #sudo
       #summary
       user = mkOption {
-	type = types.nullOr types.string;
+	type = types.nullOr types.str;
 	example = "apache2";
 	default = null;
 	description = "user to run the command as";
       };
 
       acl = mkOption {
-	type = types.listOf types.string;
+	type = types.listOf types.str;
 	default = ["ANYUSER"];
 	description = "ACL for the command";
       };
     };
   in {
     enable = mkEnableOption "remctld";
+    openFirewall = mkOption {
+      description = "open firewall for discuss (if service enabled)";
+      default = true;
+      type = types.bool;
+    };
     commands = mkOption {
       description = "command definitions";
       type = types.attrsOf (types.attrsOf (types.submodule {
@@ -77,5 +82,6 @@ in
     # systemd unit
     systemd.packages = [ athena-pkgs.remctl ];
     systemd.sockets.remctld.wantedBy = ["multi-user.target"];
+    networking.firewall.allowedTCPPorts = lib.mkIf cfg.openFirewall [4373];
   };
 }
