@@ -21,10 +21,19 @@ in
     additions = final: prev: {athena-pkgs=builtins.trace "evaluating the overlay" athena-pkgs;};
   };
 
+  inherit athena-pkgs;
   debathena-aclocal = athena-pkgs.debathena-aclocal;
   discuss = athena-pkgs.discuss;
+  python-discuss = athena-pkgs.python-discuss;
+  python-afs = athena-pkgs.python-afs;
+  python-hesiod = athena-pkgs.python-hesiod;
+  pyhesiodfs = athena-pkgs.pyhesiodfs;
   remctl = athena-pkgs.remctl;
   example-package = pkgs.callPackage ./pkgs/example-package { };
   # some-qt5-package = pkgs.libsForQt5.callPackage ./pkgs/some-qt5-package { };
   # ...
+  athena-python3 = (pkgs.python3.withPackages (ps: (map (pkg: pkg ps) [
+    athena-pkgs.python-discuss
+    athena-pkgs.python-afs
+  ])));
 }

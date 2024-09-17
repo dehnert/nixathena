@@ -2,11 +2,16 @@
 # default.nix
 { pkgs }:
 let
-  debathena-aclocal = pkgs.callPackage ./aclocal.nix { };
-in
+in rec
 {
-  inherit debathena-aclocal;
+  debathena-aclocal = pkgs.callPackage ./aclocal.nix { };
   discuss = pkgs.callPackage ./discuss.nix { inherit debathena-aclocal; };
+  python-discuss = ps: ps.callPackage ./python-discuss.nix { };
+  python-afs = ps: ps.callPackage ./python-afs.nix { };
+  hesiod = pkgs.callPackage ./hesiod.nix { };
+  python-hesiod = ps: ps.callPackage ./python-hesiod.nix { inherit hesiod; };
+  locker-support = ps: ps.callPackage ./locker-support.nix { inherit python-afs python-hesiod; };
+  pyhesiodfs = pkgs.callPackage ./pyhesiodfs.nix { inherit python-hesiod locker-support; };
   remctl = pkgs.callPackage ./remctl.nix { };
   # https://ryantm.github.io/nixpkgs/builders/images/dockertools/
 #   docker = pkgs.dockerTools.buildLayeredImage {
