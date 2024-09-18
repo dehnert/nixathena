@@ -1,4 +1,7 @@
-{ stdenv, pkgs, lib, fetchFromGitHub, autoreconfHook, debathena-aclocal, pkg-config, }:
+{ stdenv, pkgs, lib,
+  fetchFromGitHub, autoreconfHook, debathena-aclocal, pkg-config,
+  libkrb5
+}:
 
 let
   fs = lib.fileset;
@@ -25,7 +28,7 @@ in stdenv.mkDerivation {
 
   buildInputs = [
     autoreconfHook
-    pkgs.krb5
+    libkrb5
     pkgs.e2fsprogs  # ss_perror
     pkgs.yacc
     pkgs.nettools

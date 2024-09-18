@@ -1,6 +1,6 @@
 { stdenv, pkgs, lib, fetchFromGitHub,
   autoreconfHook, autoconf, automake, pkg-config,
-  krb5, libevent, pcre2, systemdLibs,
+  libkrb5, libevent, pcre2, systemdLibs,
   python3, perl,
 }:
 
@@ -19,7 +19,7 @@ stdenv.mkDerivation rec {
     autoconf
     automake
     pkg-config
-    krb5
+    libkrb5
     libevent
     pcre2
     systemdLibs

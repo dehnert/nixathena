@@ -1,5 +1,5 @@
 { stdenv, pkgs, lib, fetchFromGitHub, buildPythonPackage, setuptools, python3,
-  openafs, krb5, }:
+  openafs, libkrb5, }:
 
 let
   fs = lib.fileset;
@@ -20,7 +20,7 @@ in buildPythonPackage {
 
   buildInputs = [
     openafs
-    krb5
+    libkrb5
   ];
 
   nativeBuildInputs = [
