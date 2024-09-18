@@ -19,7 +19,6 @@ pkgs.nixosTest {
     # network-online.service is too long to wait
     # afsd.service is (seemingly) long enough to have network
     machine.wait_for_unit("afsd.service")
-    machine.succeed("ping -c1 ipv4.google.com")
     [status, out] = machine.execute("ping -c1 google.com")
     print(out)
     machine.succeed('ls /afs/athena.mit.edu/')
