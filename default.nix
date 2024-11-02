@@ -26,7 +26,7 @@ in
   inherit athena-pkgs;
   # linkFarmFromDrvs is undocumented, but the source is at
   # https://github.com/NixOS/nixpkgs/blob/master/pkgs/build-support/trivial-builders/default.nix#L578
-  default = pkgs.linkFarmFromDrvs "nixathena-pkgs" (with athena-pkgs; [ discuss pyhesiodfs remctl athena-python3 ]);
+  default = pkgs.linkFarmFromDrvs "nixathena-pkgs" (with athena-pkgs; [ discuss pyhesiodfs remctl moira athena-python3 ]);
   debathena-aclocal = athena-pkgs.debathena-aclocal;
   discuss = athena-pkgs.discuss;
   python-discuss = athena-pkgs.python-discuss;
@@ -34,6 +34,7 @@ in
   python-hesiod = athena-pkgs.python-hesiod;
   pyhesiodfs = athena-pkgs.pyhesiodfs;
   remctl = athena-pkgs.remctl;
+  moira = athena-pkgs.moira;
   # some-qt5-package = pkgs.libsForQt5.callPackage ./pkgs/some-qt5-package { };
   # ...
   athena-python3 = athena-python3;

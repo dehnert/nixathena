@@ -13,6 +13,7 @@ in rec
   locker-support = ps: ps.callPackage ./locker-support.nix { inherit python-afs python-hesiod; };
   pyhesiodfs = pkgs.callPackage ./pyhesiodfs.nix { inherit python-hesiod locker-support; };
   remctl = pkgs.callPackage ./remctl.nix { };
+  moira = pkgs.callPackage ./moira.nix { inherit hesiod; };
   # https://ryantm.github.io/nixpkgs/builders/images/dockertools/
 #   docker = pkgs.dockerTools.buildLayeredImage {
 #     name = "${dockerName}";
