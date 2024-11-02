@@ -30,7 +30,7 @@ in stdenv.mkDerivation {
     autoreconfHook
     libkrb5
     pkgs.e2fsprogs  # ss_perror
-    pkgs.yacc
+    pkgs.bison
     pkgs.nettools
     pkg-config	# needed by debathena-aclocal
     debathena-aclocal

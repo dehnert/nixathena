@@ -8,10 +8,10 @@ in buildPythonPackage {
   version = "0.2.2";
 
   src = fetchFromGitHub {
-    owner = "dehnert";
+    owner = "macathena";
     repo = "python-afs";
-    rev = "2a12421d4b94fbfecf6ea3cec459848a651f6be1"; # nix branch
-    hash = "sha256-5tiABlKD3Vbb+fSrxVcZmqqi0ArBEwbJDhslk/r/QGs=";
+    rev = "300a92404859ed99a8d9db066b9526c363760e21"; # py3 branch
+    hash = "sha256-pm3UCNqUKSzlfOk4jTenrg6PH8SMRgrRQE4uABXvXD0=";
   };
 
   build-system = [
@@ -25,7 +25,6 @@ in buildPythonPackage {
 
   nativeBuildInputs = [
     python3.pkgs.cython
-    python3.pkgs.nose
   ];
 
   pythonImportsCheck = [
