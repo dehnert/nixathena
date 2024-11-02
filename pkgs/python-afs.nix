@@ -31,6 +31,13 @@ in buildPythonPackage {
     "afs"
   ];
 
+  # The tests assume that we have AFS installed and working on the machine
+  # (e.g., they access files in AFS, expect ThisCell to be set, etc.), so
+  # skip them.
+  # pythonImportsCheck is run regardless per
+  # https://ryantm.github.io/nixpkgs/languages-frameworks/python/#using-pythonimportscheck
+  doCheck = false;
+
   #meta = with lib; {
   #  description = "Python library for Project Athena forum system";
   #  homepage = "https://github.com/mit-athena/python-discuss";
