@@ -7,6 +7,7 @@ let
   defaultPackages = [
     athena-pkgs.discuss
     athena-pkgs.remctl
+    athena-pkgs.moira
   ];
 in
 {
