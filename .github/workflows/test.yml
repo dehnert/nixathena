@@ -7,18 +7,20 @@ jobs:
   tests:
     strategy:
       matrix:
-        nixPath:
-          - nixpkgs=https://github.com/NixOS/nixpkgs/archive/refs/heads/nixpkgs-unstable.tar.gz
-          - nixpkgs=https://github.com/NixOS/nixpkgs/archive/refs/heads/nixos-unstable.tar.gz
-          - nixpkgs=https://github.com/NixOS/nixpkgs/archive/refs/heads/nixos-24.05.tar.gz
+        nixRelease:
+          - nixpkgs-unstable
+          - nixos-unstable
+          - nixos-24.05
     runs-on: ubuntu-latest
+    env:
+      nixPath: "nixpkgs=https://github.com/NixOS/nixpkgs/archive/refs/heads/${{ matrix.nixRelease }}.tar.gz"
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
     - name: Install nix
       uses: cachix/install-nix-action@v29
       with:
-        nix_path: "${{ matrix.nixPath }}"
+        nix_path: "${{ env.nixPath }}"
         extra_nix_config: |
           experimental-features = nix-command flakes
           access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
@@ -26,5 +28,7 @@ jobs:
       run: nix-instantiate --eval -E '(import <nixpkgs> {}).lib.version'
     - name: Run flake checks
       run: nix flake check
+    - name: Build packages using flake
+      run: nix build
     - name: Run standard metapackage test
       run: nix run '.#test.meta-standard'
