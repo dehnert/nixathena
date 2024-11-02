@@ -13,6 +13,8 @@ on:
 jobs:
   tests:
     strategy:
+      # If one nixpkgs fails, we'd like to see which other ones do too
+      fail-fast: false
       matrix:
         # Set this to notify the global nur package registry that changes are
         # available.
@@ -33,18 +35,20 @@ jobs:
         # https://github.com/<your_githubname>/nur-packages/settings/secrets
         cachixName:
           - nixathena
-        nixPath:
-          - nixpkgs=https://github.com/NixOS/nixpkgs/archive/refs/heads/nixpkgs-unstable.tar.gz
-          - nixpkgs=https://github.com/NixOS/nixpkgs/archive/refs/heads/nixos-unstable.tar.gz
-          - nixpkgs=https://github.com/NixOS/nixpkgs/archive/refs/heads/nixos-24.05.tar.gz
+        nixRelease:
+          - nixpkgs-unstable
+          - nixos-unstable
+          - nixos-24.05
     runs-on: ubuntu-latest
+    env:
+      nixPath: "nixpkgs=https://github.com/NixOS/nixpkgs/archive/refs/heads/${{ matrix.nixRelease }}.tar.gz"
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
     - name: Install nix
       uses: cachix/install-nix-action@v29
       with:
-        nix_path: "${{ matrix.nixPath }}"
+        nix_path: "${{ env.nixPath }}"
         extra_nix_config: |
           experimental-features = nix-command flakes
           access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
