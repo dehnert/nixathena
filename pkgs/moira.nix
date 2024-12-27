@@ -21,7 +21,7 @@ in stdenv.mkDerivation rec {
   sourceRoot = "source/moira";
 
   env = {
-    NIX_CFLAGS_COMPILE = "-Wno-error=implicit-function-declaration -Wno-error=implicit-int -Wno-error=return-mismatch";
+    NIX_CFLAGS_COMPILE = "-Wno-error=implicit-function-declaration";
   };
 
   meta = with lib; {

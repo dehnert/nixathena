@@ -17,7 +17,7 @@ in stdenv.mkDerivation {
   };
 
   env = {
-    NIX_CFLAGS_COMPILE = "-Wno-error=implicit-function-declaration -Wno-error=implicit-int -Wno-error=return-mismatch";
+    NIX_CFLAGS_COMPILE = "-Wno-error=implicit-function-declaration -Wno-error=implicit-int -Wno-return-mismatch";
   };
 
   meta = with lib; {
