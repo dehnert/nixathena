@@ -20,6 +20,10 @@ in stdenv.mkDerivation rec {
   };
   sourceRoot = "source/moira";
 
+  env = {
+    NIX_CFLAGS_COMPILE = "-Wno-error=implicit-function-declaration -Wno-error=implicit-int -Wno-error=return-mismatch";
+  };
+
   meta = with lib; {
     description = "Athena Service Management system";
     homepage = "https://github.com/mit-athena/moira";

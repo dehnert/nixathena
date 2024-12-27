@@ -16,6 +16,10 @@ in stdenv.mkDerivation {
     hash = "sha256-0WPz6OeeIAd/c8zUD00f0gDhYwO3ll9qPENxqPTjPhk=";
   };
 
+  env = {
+    NIX_CFLAGS_COMPILE = "-Wno-error=implicit-function-declaration -Wno-error=implicit-int -Wno-error=return-mismatch";
+  };
+
   meta = with lib; {
     description = "Project Athena forum system";
     homepage = "https://github.com/mit-athena/discuss";
