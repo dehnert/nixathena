@@ -10,7 +10,10 @@ in rec
   python-afs = ps: ps.callPackage ./python-afs.nix { };
   hesiod = pkgs.callPackage ./hesiod.nix { };
   python-hesiod = ps: ps.callPackage ./python-hesiod.nix { inherit hesiod; };
-  locker-support = ps: ps.callPackage ./locker-support.nix { inherit python-afs python-hesiod; };
+  locker-support = ps: ps.callPackage ./locker-support.nix {
+    python-afs = (python-afs ps);
+    python-hesiod = (python-hesiod ps);
+  };
   pyhesiodfs = pkgs.callPackage ./pyhesiodfs.nix { inherit python-hesiod locker-support; };
   remctl = pkgs.callPackage ./remctl.nix { };
   moira = pkgs.callPackage ./moira.nix { inherit hesiod; };

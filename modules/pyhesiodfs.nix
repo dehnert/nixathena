@@ -1,5 +1,5 @@
 { lib, pkgs, config, options,
-  specialArgs, modulesPath,
+  specialArgs, modulesPath, ...
 }:
 let
   cfg = config.services.pyhesiodfs;

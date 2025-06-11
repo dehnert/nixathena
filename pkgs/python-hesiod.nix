@@ -1,5 +1,5 @@
 { stdenv, pkgs, lib, fetchFromGitHub,
-  python3Packages, buildPythonPackage, setuptools,
+  cython, buildPythonPackage, setuptools,
   hesiod,
 }:
 
@@ -27,7 +27,7 @@ in buildPythonPackage {
   ];
 
   nativeBuildInputs = [
-    python3Packages.cython
+    cython
   ];
 
   pythonImportsCheck = [

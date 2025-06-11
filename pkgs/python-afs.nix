@@ -1,5 +1,7 @@
-{ stdenv, pkgs, lib, fetchFromGitHub, buildPythonPackage, setuptools, python3,
-  openafs, libkrb5, }:
+{ stdenv, pkgs, lib, fetchFromGitHub,
+  cython, buildPythonPackage, setuptools,
+  openafs, libkrb5,
+}:
 
 let
   fs = lib.fileset;
@@ -24,7 +26,7 @@ in buildPythonPackage {
   ];
 
   nativeBuildInputs = [
-    python3.pkgs.cython
+    cython
   ];
 
   pythonImportsCheck = [

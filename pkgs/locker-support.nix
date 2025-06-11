@@ -23,8 +23,8 @@ in buildPythonPackage {
   ];
 
   dependencies = [
-    (python-afs python3Packages)
-    (python-hesiod python3Packages)
+    python-afs
+    python-hesiod
   ];
 
   buildInputs = [
