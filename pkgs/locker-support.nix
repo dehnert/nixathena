@@ -1,6 +1,11 @@
-{ stdenv, pkgs, lib, fetchFromGitHub,
-  python3Packages, buildPythonPackage, setuptools,
-  python-afs, python-hesiod,
+{
+  stdenv,
+  lib,
+  fetchFromGitHub,
+  buildPythonPackage,
+  setuptools,
+  python-afs,
+  python-hesiod,
 }:
 
 # TODO: Also install binaries

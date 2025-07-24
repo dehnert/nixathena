@@ -1,22 +1,26 @@
 # https://nix.dev/tutorials/packaging-existing-software#building-with-nix-build
 # default.nix
-{ pkgs }:
+final: prev:
 let
-in rec
+  inherit (final) callPackage;
+in
 {
-  debathena-aclocal = pkgs.callPackage ./aclocal.nix { };
-  discuss = pkgs.callPackage ./discuss.nix { inherit debathena-aclocal; };
-  python-discuss = ps: ps.callPackage ./python-discuss.nix { };
-  python-afs = ps: ps.callPackage ./python-afs.nix { };
-  hesiod = pkgs.callPackage ./hesiod.nix { };
-  python-hesiod = ps: ps.callPackage ./python-hesiod.nix { inherit hesiod; };
-  locker-support = ps: ps.callPackage ./locker-support.nix {
-    python-afs = (python-afs ps);
-    python-hesiod = (python-hesiod ps);
-  };
-  pyhesiodfs = pkgs.callPackage ./pyhesiodfs.nix { inherit python-hesiod locker-support; };
-  remctl = pkgs.callPackage ./remctl.nix { };
-  moira = pkgs.callPackage ./moira.nix { inherit hesiod; };
+  debathena-aclocal = callPackage ./aclocal.nix { };
+  discuss = callPackage ./discuss.nix { };
+  hesiod = callPackage ./hesiod.nix { };
+  pythonPackagesExtensions = prev.pythonPackagesExtensions ++ [
+    (python-final: python-prev: let
+      inherit (python-final) callPackage;
+    in {
+      python-discuss = callPackage ./python-discuss.nix { };
+      python-afs = callPackage ./python-afs.nix { };
+      python-hesiod = callPackage ./python-hesiod.nix { };
+      locker-support = callPackage ./locker-support.nix { };
+    })
+  ];
+  pyhesiodfs = callPackage ./pyhesiodfs.nix { };
+  remctl = callPackage ./remctl.nix { };
+  moira = callPackage ./moira.nix { };
   # https://ryantm.github.io/nixpkgs/builders/images/dockertools/
 #   docker = pkgs.dockerTools.buildLayeredImage {
 #     name = "${dockerName}";
