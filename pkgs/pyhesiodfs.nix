@@ -1,6 +1,6 @@
-{ stdenv, pkgs, lib, fetchFromGitHub,
-  python3Packages,
-  python-hesiod, locker-support,
+{ stdenv, pkgs, lib, fetchFromGitHub,   # general nix
+  python3Packages,                      # nix python
+  python-hesiod, locker-support,        # athena
 }:
 
 let
@@ -16,6 +16,9 @@ in python3Packages.buildPythonApplication {
     rev = "master";
     hash = "sha256-5Y10agUgfPuJ7Mg8IR0ZMtgqMXmG8F+kTQyjXrBGnBk=";
   };
+
+  pyproject = true;
+  build-system = [ python3Packages.setuptools ];
 
   dependencies = with python3Packages; [
     fuse

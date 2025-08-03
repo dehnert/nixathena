@@ -13,6 +13,7 @@ in buildPythonPackage {
     hash = "sha256-8/ew78oM39U+ibbQvYkCe0kzIBYgK2YznVWQiA7nWds=";
   };
 
+  pyproject = true;
   build-system = [
     setuptools
   ];
