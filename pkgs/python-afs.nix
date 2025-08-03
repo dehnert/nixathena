@@ -1,5 +1,5 @@
 { stdenv, pkgs, lib, fetchFromGitHub,
-  cython, buildPythonPackage, setuptools,
+  cython, python, buildPythonPackage, setuptools,
   openafs, libkrb5,
 }:
 
@@ -33,6 +33,27 @@ in buildPythonPackage {
   pythonImportsCheck = [
     "afs"
   ];
+
+  env = lib.optionalAttrs (python.pythonAtLeast "3.13") {
+    # Workaround for https://github.com/mit-athena/python-afs/issues/6
+    # Can probably be removed in 3.15 or maybe 3.14
+
+    # Without this hack, Python and OpenAFS have competing lock.h files, and we
+    # need OpenAFS's to win but Python's does win. Until Python 3.15 comes out,
+    # we force OpenAFS's headers to come before Python's when building
+    # python-afs. This is a little tricky, because Python's headers use -I by
+    # default while OpenAFS's use -isystem, and -I headers all come before
+    # -isystem ones. However, if we add Python headers with -isystem at the
+    # start of the compiler command, Python's -I will be treated as a dup of a
+    # system header, and Python's headers will be moved to the system section
+    # of the search path. *However*, because they're at the *start* of the
+    # search path, they'll still beat OpenAFS, so we need to also add -isystem
+    # for OpenAFS at the start of the compiler command, so the relative order
+    # among the system section is correct.
+
+    NIX_CFLAGS_COMPILE="-isystem${openafs.dev}/include -isystem${python}/include/python${python.pythonVersion}";
+    #NIX_DEBUG="1";
+  };
 
   # The tests assume that we have AFS installed and working on the machine
   # (e.g., they access files in AFS, expect ThisCell to be set, etc.), so
