@@ -27,6 +27,12 @@ stdenv.mkDerivation rec {
     perl    # build man pages
   ];
 
+  patches = [
+    # Required for automake 1.17+ compatibility
+    # See https://github.com/rra/remctl/issues/35
+    ./remctl/escaped-hash.patch
+  ];
+
   # This runs autoreconf twice, but autoreconfHook sets up the autoconf
   # macros and ./bootstrap makes the man pages, so it's hard to skip
   # either.
