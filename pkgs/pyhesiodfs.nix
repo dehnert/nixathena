@@ -1,11 +1,11 @@
-{ stdenv, pkgs, lib, fetchFromGitHub,   # general nix
-  python3Packages,                      # nix python
-  python-hesiod, locker-support,        # athena
+{
+  stdenv,
+  lib,
+  fetchFromGitHub,
+  python3Packages,
 }:
 
-let
-  fs = lib.fileset;
-in python3Packages.buildPythonApplication {
+python3Packages.buildPythonApplication {
   pname = "pyhesiodfs";
   version = "1.1";
 
@@ -22,9 +22,8 @@ in python3Packages.buildPythonApplication {
 
   dependencies = with python3Packages; [
     fuse
-    (python-hesiod python3Packages)
-    (locker-support python3Packages)
-    #(builtins.trace python-hesiod python-hesiod)
+    python-hesiod
+    locker-support
   ];
 
   #meta = with lib; {
