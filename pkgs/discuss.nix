@@ -33,13 +33,14 @@ in stdenv.mkDerivation {
   buildInputs = [
     autoreconfHook
     libkrb5
-    pkgs.e2fsprogs  # ss_perror
+    pkgs.e2fsprogs.dev # ss_perror library function
     pkgs.bison
     pkgs.nettools
     pkg-config	# needed by debathena-aclocal
     debathena-aclocal
   ];
   nativeBuildInputs = [
+    pkgs.e2fsprogs.scripts  # mk_cmds script
   ];
 
   #configureFlags = ["--without-krb4" "--with-krb5" "--with-zephyr"];
