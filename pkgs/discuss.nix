@@ -40,7 +40,9 @@ in stdenv.mkDerivation {
     debathena-aclocal
   ];
   nativeBuildInputs = [
-    pkgs.e2fsprogs.scripts  # mk_cmds script
+    # mk_cmds script
+    # Moved to .scripts output in nixpkgs commit e58c9e7dd621a7d7 (25.11)
+    (if pkgs.e2fsprogs ? scripts then pkgs.e2fsprogs.scripts else pkgs.e2fsprogs)
   ];
 
   #configureFlags = ["--without-krb4" "--with-krb5" "--with-zephyr"];
