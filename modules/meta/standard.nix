@@ -3,7 +3,7 @@
 
 let
   cfg = config.nixathena.meta.standard;
-  athena-pkgs = import ../../pkgs { inherit pkgs; };
+  athena-pkgs = pkgs.extend (import ../../pkgs);
   defaultPackages = [
     athena-pkgs.discuss
     athena-pkgs.remctl
