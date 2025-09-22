@@ -6,6 +6,7 @@
   # the `nixathena.meta.standard` module and then setting
   # `nixathena.meta.standard.enable = true;`
 
+  options = ./options.nix;
   services = {
     discussd = ./services/discussd.nix;
     remctld = ./services/remctld.nix;
