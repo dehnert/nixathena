@@ -7,6 +7,9 @@
   # `nixathena.meta.standard.enable = true;`
 
   options = ./options.nix;
+  config = {
+    krb5 = ./config/krb5.nix;
+  };
   services = {
     discussd = ./services/discussd.nix;
     remctld = ./services/remctld.nix;

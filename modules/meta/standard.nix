@@ -12,6 +12,7 @@ let
 in
 {
   imports = [
+    ../config/krb5.nix
     ../services/pyhesiodfs.nix
   ];
 
@@ -30,11 +31,11 @@ in
 
   config = lib.mkIf cfg.enable {
     environment.systemPackages = cfg.packages;
-    services.pyhesiodfs.enable = true;
-    security.krb5.enable = true;
+    services.pyhesiodfs.enable = lib.mkDefault true;
     services.openafsClient = {
-      enable = true;
-      cellName = "athena.mit.edu";
+      enable = lib.mkDefault true;
+      cellName = lib.mkDefault "athena.mit.edu";
     };
+    nixathena.config.krb5.enable = lib.mkDefault true;
   };
 }
