@@ -1,9 +1,9 @@
 { lib, pkgs, config, options,
-  specialArgs, modulesPath,
+  specialArgs, modulesPath, ...
 }:
 let
   cfg = config.services.remctld;
-  athena-pkgs = pkgs.extend (import ../pkgs);
+  athena-pkgs = pkgs.extend (import ../../pkgs);
 in
 {
   options.services.remctld = (let

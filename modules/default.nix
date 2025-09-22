@@ -6,9 +6,15 @@
   # the `nixathena.meta.standard` module and then setting
   # `nixathena.meta.standard.enable = true;`
 
-  discussd = ./discussd.nix;
-  remctld = ./remctld.nix;
-  pyhesiodfs = ./pyhesiodfs.nix;
+  options = ./options.nix;
+  config = {
+    krb5 = ./config/krb5.nix;
+  };
+  services = {
+    discussd = ./services/discussd.nix;
+    remctld = ./services/remctld.nix;
+    pyhesiodfs = ./services/pyhesiodfs.nix;
+  };
   meta = {
     standard = ./meta/standard.nix;
   };

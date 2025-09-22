@@ -9,7 +9,7 @@ pkgs.nixosTest {
   name = "meta-standard";
   nodes.machine = { config, pkgs, ... }: {
     imports = [
-      nixathena.modules.meta.standard
+      nixathena.modules.options
     ];
     nixathena.meta.standard.enable = true;
   };
