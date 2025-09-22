@@ -18,8 +18,7 @@ in
   modules = import ./modules; # NixOS modules
   #overlays = import ./overlays; # nixpkgs overlays
   overlays = {
-    # This doesn't get run????
-    additions = final: prev: {athena-pkgs=builtins.trace "evaluating the overlay" athena-pkgs;};
+    default = import ./pkgs;
   };
 
   inherit athena-pkgs athena-python3;
