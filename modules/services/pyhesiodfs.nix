@@ -3,7 +3,7 @@
 }:
 let
   cfg = config.services.pyhesiodfs;
-  athena-pkgs = pkgs.extend (import ../pkgs);
+  athena-pkgs = pkgs.extend (import ../../pkgs);
 in
 {
   options.services.pyhesiodfs = (let

@@ -12,7 +12,7 @@ let
 in
 {
   imports = [
-    ../pyhesiodfs.nix
+    ../services/pyhesiodfs.nix
   ];
 
   options.nixathena.meta.standard = (let
