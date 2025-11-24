@@ -17,7 +17,7 @@ jobs:
       nixPath: "nixpkgs=https://github.com/NixOS/nixpkgs/archive/refs/heads/${{ matrix.nixRelease }}.tar.gz"
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
     - name: Install nix
       uses: cachix/install-nix-action@v31
       with:
